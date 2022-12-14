@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "Thêm người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+ 
+
+<h2>Thêm khoa</h2>
+<form action="/User/InsertUser" method="post">
+    <label for="maKhoa">Mã khoa</label> <input type="text" name="MaKhoa" id="maKhoa" /><br>
+    <label for="tenKhoa">Tên khoa</label> <input type="text" name="TenKhoa" id="tenKhoa" /><br>
+    <input type="submit" name="submit" value="Thêm" />
+ </form>

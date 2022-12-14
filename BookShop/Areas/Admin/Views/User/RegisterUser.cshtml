@@ -1,0 +1,14 @@
+﻿@using BookShop.Areas.Admin.Models;
+@model User
+@{
+    ViewData["Title"] = "Thông tin lấy được từ form";
+}
+@{
+    /*
+    <p>Mã khoa:@Model.MaKhoa</p>
+    <p>Tên khoa:@Model.TenKhoa</p>
+    */
+    <p>@ViewData["ThongBao"]</p>
+    <a asp-area="" asp-controller="Account" asp-action="Login"><p>Trở lại đăng nhập</p></a>
+    Layout = "~/Views/Shared/_LoginLayOut.cshtml";
+}

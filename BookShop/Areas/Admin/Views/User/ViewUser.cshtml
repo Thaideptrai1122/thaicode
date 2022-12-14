@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "ViewUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@model BookShop.Areas.Admin.Models.User
+    <h2>Chỉnh sửa thông tin người dùng</h2>
+    <form action="/Admin/User/UpdateUser" method="post">
+        <label for="ID"></label> <input type="hidden" name="user_ID" value="@Model.user_ID" /><br>
+        <label for="hoten">Họ và tên</label> <input type="text" name="fullname" value="@Model.fullname" /><br>
+        <label for="tentaikhoan">Tên tài khoản</label> <input type="text" name="username" value="@Model.username" /><br>
+        <label for="matkhau">Mật khẩu</label> <input type="text" name="password" value="@Model.password" /><br>
+        <label for="diachi">Địa chỉ</label> <input type="text" name="address" value="@Model.address" /><br>
+        <label for="email">Email</label> <input type="text" name="email" value="@Model.email" /><br>
+        <label for="sđt">Số điện  thoại</label> <input type="text" name="phone" value="@Model.phone" /><br>
+        <label for="phanquyen">Phân quyền</label> <input type="text" name="role" value="@Model.role" /><br>
+        <input type="submit" name="submit" value="Cập nhật" />
+    </form>

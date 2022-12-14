@@ -1,0 +1,65 @@
+﻿@model IEnumerable<BookShop.Areas.Admin.Models.User>
+
+    @{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Trang quản lý người dùng</h1>
+
+
+<table border="1">
+    <tr>
+        <th>#</th>
+        <th>Họ và tên</th>
+        <th>Tên tài khoản</th>
+        <th>Email</th>
+        <th>Địa chỉ</th>
+        <th>Số điện thoại</th>
+        <th>Phân quyền</th>
+        <th>Chức năng</th>
+    </tr>
+
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>
+                @user.user_ID
+            </td>
+            <td>
+                @user.fullname
+            </td>
+            <td>
+                @user.username
+            </td>
+            <td>
+                @user.email
+            </td>
+            <td>
+                @user.address
+            </td>
+            
+            <td>
+                @user.phone
+            </td>
+            @{
+                if(user.role == "0"){
+                    user.role = "Quản trị viên";
+                } else{
+                    user.role = "Khách hàng";
+                }
+                        <td>
+                            @user.role
+                        </td>
+            
+            }
+            
+            <td>
+                <a href="User/ViewUser?Id=@user.user_ID">Sửa</a>
+                <a href="User/DeleteUser?Id=@user.user_ID">Xóa</a>
+            </td>
+
+        </tr>
+    }
+</table><br>
+    <a style="width:50%;"style class="nav-link text-dark btn btn-primary" asp-area="Admin" asp-controller="User" asp-action="EnterUser">Thêm mới người dùng</a>
