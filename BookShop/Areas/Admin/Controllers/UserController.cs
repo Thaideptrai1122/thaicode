@@ -6,9 +6,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BookShop.Models;
 using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace BookShop.Areas.Admin.Controllers
+
+    
 {
+    
+
+
+
+
     [Area("Admin")]
     public class UserController : Controller
     {
@@ -19,16 +27,38 @@ namespace BookShop.Areas.Admin.Controllers
             return View(context.GetUsers());
         }
 
-        public IActionResult Login(string username, string password)
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult LoginUser()
+        {
+            return View();
+        }
+        public IActionResult CheckLoginAdmin(User us)
         {
             StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3306;database=bookshop;");
-            int count = context.CheckLogin(username, password);
-            if (count > 0)
-                return RedirectToAction("/Admin/Dashboard/Index");
-            else
-                return RedirectToAction("/Admin/Dashboard/Login");
+            int count = context.CheckLoginAdmin(us.username, us.password);
+            
+            if(count == 0)
+            {
+                return RedirectToAction("Login", "User");
+            }
 
+            if (count > 0)
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
+            return View();
+            
         }
+
+        public IActionResult SuccessLogin()
+        {
+            return View();
+        }
+
         public IActionResult EnterUser()
         {
             return View();
@@ -42,43 +72,34 @@ namespace BookShop.Areas.Admin.Controllers
             //StoreContext context = HttpContext.RequestServices.GetService(typeof(BookShop.Areas.Admin.Models.StoreContext)) as StoreContext;
             StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3306;database=bookshop;");
             count = context.RegisterUser(acc);
-            if (count> 0)
+            if (count > 0)
                 ViewData["thongbao"] = "Đăng ký Thành Công";
+             
             else
 
                 ViewData["thongbao"] = "Đăng ký không thành công";
             return View();
         }
 
+
+
         public IActionResult CheckRegister()
         {
             return View();
         }
 
-        public IActionResult CheckRegisterUsername(User us)
+        public IActionResult CheckRegisterError(User us)
         {
             int count;
             StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3306;database=bookshop;");
-            count = context.CheckRegisterUsername(us.username);
+            count = context.CheckRegisterError(us.username, us.email);
             if (count > 0)
-                ViewData["thongbao"] = "Ten dang nhap da ton tai";
+                ViewData["thongbao"] = "Tai khoan da ton tai";
             else
-            { return View(CheckRegisterEmail(us)); }
+            { return View(RegisterUser(us)); }
             return View();
         }
 
-        public IActionResult CheckRegisterEmail(User mail)
-        {
-            int count;
-            StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3306;database=bookshop;");
-            count = context.CheckRegisterEmail(mail.email);
-            if (count > 0)
-                ViewData["thongbao"] = "Email da duoc su dung";
-            else
-            { return View(RegisterUser(mail)); }
-            return View();
-
-        }
 
         public IActionResult ViewUser(string Id)
         {
@@ -127,6 +148,27 @@ namespace BookShop.Areas.Admin.Controllers
                 TempData["AlertType"] = "alert-info";
             }
         }
+
+
+        public IActionResult CheckLoginUser(User us)
+        {
+            StoreContext context = new StoreContext("server=127.0.0.1;user id=root;password=;port=3306;database=bookshop;");
+            int count = context.CheckLoginUser(us.username, us.password);
+
+            if (count == 0)
+            {
+                return RedirectToAction("LoginUser", "User");
+            }
+
+            if (count > 0)
+            {
+                return RedirectToAction("SuccesLogin", "User");
+            }
+            return View();
+
+        }
+
+
 
     }
 }

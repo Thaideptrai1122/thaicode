@@ -87,7 +87,7 @@
 
 
 
-<form action="CheckRegisterUsername"  method="post">
+<form action="CheckRegisterError"  method="post">
     <div class="container">
         <label for="UserName"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="username" id="UserName" required>
@@ -99,6 +99,7 @@
         <input type="email" placeholder="Enter Email" name="email" id="Email" required>
 
         <button type="submit">Register</button>
+        <a asp-area ="" asp-controller="Account" asp-action="Login"><p>Trở về trang đăng nhập</p></a>
     </div>
 </form>
 

@@ -1,11 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Trang Đăng Nhập";
-    Layout = "~/Views/Shared/_LoginLayOut.cshtml";
+    ViewData["Title"] = "Trang đăng nhập";
+    Layout = null;
 }
-
-
 <style>
-
     form {
         border: 3px solid #f1f1f1;
     }
@@ -22,7 +19,7 @@
 
     /* Set a style for all buttons */
     button {
-        background-color: #c5a992;
+        background-color: #04AA6D;
         color: white;
         padding: 14px 20px;
         margin: 8px 0;
@@ -31,14 +28,10 @@
         width: 100%;
     }
 
-    p {
-        text-align: center;
-    }
-
-    /* Add a hover effect for buttons */
-    button:hover {
-        opacity: 0.8;
-    }
+        /* Add a hover effect for buttons */
+        button:hover {
+            opacity: 0.8;
+        }
 
     /* Extra style for the cancel button (red) */
     .cancelbtn {
@@ -76,21 +69,18 @@
         width: 100%;
     }
 
+    }
 </style>
-<h2 style="text-align:center;">Đăng nhập</h2>
-
-<form action="/Admin/User/CheckLoginUser" method="post">
+<h2 style="text-align:center;">Trang đăng nhập quản trị</h2>
+<form action="CheckLoginAdmin" method="post">
     <div class="container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Ente Password" name="psw" required>
-
+        <label for="password"><b>Password</b></label>
+        <input type="text" placeholder="Enter Password" name="password" required>
         <button type="submit">Login</button>
-        <label>
-            <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
-        <p>If you dont have an account.<a asp-area="Admin" asp-controller="User" asp-action="CheckRegister">Register</a></p>
+
     </div>
+
 </form>

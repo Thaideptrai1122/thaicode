@@ -17,17 +17,16 @@ namespace BookShop.Areas.Admin.Models
             return new MySqlConnection(ConnectionString);
         }
 
-        public int CheckLogin(string username, string password)
+        public int CheckLoginAdmin(string usname, string pass)
         {
             using (MySqlConnection conn = GetConnection())
             {
                 int i = 0;
                 conn.Open();
-                var str = "select * from USER where username=@username and password=@password and role='0'";
+                var str = "select * from USER where username=@username and password=@password and role='0' ";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
-                cmd.Parameters.AddWithValue("username", username);
-                cmd.Parameters.AddWithValue("password", password);
-
+                cmd.Parameters.AddWithValue("username", usname);
+                cmd.Parameters.AddWithValue("password", pass);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -36,9 +35,31 @@ namespace BookShop.Areas.Admin.Models
                     }
                 }
                 return i;
-
             }
         }
+
+        public int CheckLoginUser(string usname, string pass)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                int i = 0;
+                conn.Open();
+                var str = "select * from USER where username=@username and password=@password";
+                MySqlCommand cmd = new MySqlCommand(str, conn);
+                cmd.Parameters.AddWithValue("username", usname);
+                cmd.Parameters.AddWithValue("password", pass);
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        i++;
+                    }
+                }
+                return i;
+            }
+        }
+
+
         public List<User> GetUsers()
         {
             List<User> list = new List<User>();
@@ -84,9 +105,9 @@ namespace BookShop.Areas.Admin.Models
                 cmd.Parameters.AddWithValue("password", acc.password);
                 cmd.Parameters.AddWithValue("email", acc.email);
                 return (cmd.ExecuteNonQuery());
-
             }
         }
+
 
 
         public int UpdateUser(User us)
@@ -147,37 +168,17 @@ namespace BookShop.Areas.Admin.Models
             }
         }
 
-        public int CheckRegisterUsername(string us)
+        public int CheckRegisterError(string us, string mail)
         {
             int i = 0;
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                var str = "select * from USER where username=@Username";
+                var str = "select * from USER where username=@username or email = @email";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
 
-                cmd.Parameters.AddWithValue("Username", us);
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        i++;
-                    }
-                }
-            }
-            return i;
-        }
-
-        public int CheckRegisterEmail(string mail)
-        {
-            int i = 0;
-            using (MySqlConnection conn = GetConnection())
-            {
-                conn.Open();
-                var str = "select * from USER where email=@Email";
-                MySqlCommand cmd = new MySqlCommand(str, conn);
-
-                cmd.Parameters.AddWithValue("Email", mail);
+                cmd.Parameters.AddWithValue("username", us);
+                cmd.Parameters.AddWithValue("email", mail);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
