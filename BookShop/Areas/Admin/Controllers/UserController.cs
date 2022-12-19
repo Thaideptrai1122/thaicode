@@ -12,11 +12,6 @@ namespace BookShop.Areas.Admin.Controllers
 
     
 {
-    
-
-
-
-
     [Area("Admin")]
     public class UserController : Controller
     {
@@ -76,7 +71,6 @@ namespace BookShop.Areas.Admin.Controllers
                 ViewData["thongbao"] = "Đăng ký Thành Công";
              
             else
-
                 ViewData["thongbao"] = "Đăng ký không thành công";
             return View();
         }
@@ -162,7 +156,7 @@ namespace BookShop.Areas.Admin.Controllers
 
             if (count > 0)
             {
-                return RedirectToAction("SuccesLogin", "User");
+                return RedirectToAction("SuccessLogin", "User");
             }
             return View();
 

@@ -28,11 +28,11 @@
 
 				<div class="contact-detail d-flex flex-wrap mt-4">
 					<div class="detail mr-6 mb-4">
-						<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						<p>Nếu có bất kỳ thắc mắc gì về sản phẩm, cũng như là chất lượng dịch vụ. Đừng ngại gửi feedback về cho chúng tôi vào khung bên kia hoặc liên hệ số hotline: </p>
 						<ul class="list-unstyled list-icon">
 							<li><i class="icon icon-phone"></i>+1650-243-0000</li>
 							<li><i class="icon icon-envelope-o"></i><a href="mailto:info@yourcompany.com">info@yourcompany.com</a></li>
-							<li><i class="icon icon-location2"></i>North Melbourne VIC 3051, Australia</li>
+							<li><i class="icon icon-location2"></i>Linh Trung, DĨ An Bình Dương</li>
 						</ul>
 					</div><!--detail-->
 					<div class="detail mb-4">
@@ -53,32 +53,60 @@
 				
 				<div class="contact-information">
 					<h2>Send A Message</h2>
-					<form name="contactform" action="contact.php" method="post" class="contact-form d-flex flex-wrap mt-4">
-						<div class="row">
-					    	<div class="col-md-6">
-								<input type="text" minlength="2" name="name" placeholder="Name" class="u-full-width" required>
-							</div>
-							<div class="col-md-6">
-								<input type="email" name="email" placeholder="E-mail" class="u-full-width" required>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-md-12">
-
-								<textarea class="u-full-width" name="message" placeholder="Message" style="height: 150px;" required></textarea>
-
-								<label>
-								    <input type="checkbox" required>
-								    <span class="label-body">I agree all the <a href="#">terms and conditions</a></span>
-								</label>
-
-								<button type="submit" name="submit" class="btn btn-full btn-rounded">Submit</button>
-							</div>
-						</div>
+					<form
+					  action="https://formspree.io/f/xzbqpeop"
+					  method="POST"
+					>
+					  <label>
+						Your email:
+						<input type="email" name="email">
+					  </label>
+					  <label>
+						Your message:
+						<textarea name="message"></textarea>
+					  </label>
+					  <!-- your other form fields go here -->
+					  <button type="submit">Send</button>
 					</form>
 
 				</div><!--contact-information-->
+
+				
+
+				<script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+				<script>
+					/* paste this line in verbatim */
+					window.formbutton = window.formbutton || function () { (formbutton.q = formbutton.q || []).push(arguments) };
+					/* customize formbutton below*/
+					formbutton("create", {
+						action: "https://formspree.io/f/xzbqpeop",
+						title: "How can we help?",
+						fields: [
+							{
+								type: "email",
+								label: "Email:",
+								name: "email",
+								required: true,
+								placeholder: "your@email.com"
+							},
+							{
+								type: "textarea",
+								label: "Message:",
+								name: "message",
+								placeholder: "What's on your mind?",
+							},
+							{ type: "submit" }
+						],
+						styles: {
+							title: {
+								backgroundColor: "gray"
+							},
+							button: {
+								backgroundColor: "gray"
+							}
+						}
+					});
+				</script>
 
 			</div><!--col-md-6-->
 

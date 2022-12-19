@@ -38,16 +38,16 @@ namespace BookShop.Areas.Admin.Models
             }
         }
 
-        public int CheckLoginUser(string usname, string pass)
+        public int CheckLoginUser(string username, string passw)
         {
             using (MySqlConnection conn = GetConnection())
             {
                 int i = 0;
                 conn.Open();
-                var str = "select * from USER where username=@username and password=@password";
+                var str = "select * from USER where username=@username and password=@password and role='1' ";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
-                cmd.Parameters.AddWithValue("username", usname);
-                cmd.Parameters.AddWithValue("password", pass);
+                cmd.Parameters.AddWithValue("username", username);
+                cmd.Parameters.AddWithValue("password", passw);
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -83,7 +83,7 @@ namespace BookShop.Areas.Admin.Models
                             email = reader["email"].ToString(),
                             address = reader["address"].ToString(),
                             phone = reader["phone"].ToString(),
-                            role = reader["role"].ToString()
+                            role = reader["role"].ToString(),
                         });
                     }
                     reader.Close();
@@ -99,11 +99,12 @@ namespace BookShop.Areas.Admin.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                var str = "insert into user (username, password, email) values(@username, @password, @email)";
+                var str = "insert into user (username, password, email, role) values(@username, @password, @email, '1')";
                 MySqlCommand cmd = new MySqlCommand(str, conn);
                 cmd.Parameters.AddWithValue("username", acc.username);
                 cmd.Parameters.AddWithValue("password", acc.password);
                 cmd.Parameters.AddWithValue("email", acc.email);
+               
                 return (cmd.ExecuteNonQuery());
             }
         }
